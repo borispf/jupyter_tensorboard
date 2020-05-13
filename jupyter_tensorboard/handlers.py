@@ -49,6 +49,12 @@ def load_jupyter_server_extension(nb_app):
 
 class TensorboardHandler(IPythonHandler):
 
+    def check_xsrf_cookie(self):
+        # don't check XSRF for Tensorboard.
+        # This is probably a Bad Idea(TM) but it seems unlikely that
+        # tensorboard can do much bad through JupyterHub.
+        return
+
     @web.authenticated
     def get(self, name, path):
 
